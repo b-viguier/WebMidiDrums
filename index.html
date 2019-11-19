@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebMidi Drums</title>
+
+    <script src="js/webmidi.min.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="webmididrums">
+
+    <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
+    <div v-else-if="midiInput == null">Looking for MIDI devices…</div>
+    <div v-if="midiInput != null" class="settings">
+        <label for="midi-input">Midi Input:</label>
+        <select id="midi-input" v-model="selectedMidiInputId">
+            <option v-for="input in WebMidi.inputs" :value="input.id" :key="input.id">{{ input.name }}</option>
+        </select>
+    </div>
+    <div v-if="midiOutput != null" class="settings">
+        <label for="midi-output">Midi Output:</label>
+        <select id="midi-output" v-model="selectedMidiOutputId">
+            <option v-for="output in WebMidi.outputs" :value="output.id" :key="output.id">{{ output.name }}</option>
+        </select>
+    </div>
+
+    <div class="credits">
+        <a href="https://github.com/b-viguier/WebMidiDrums">WebMidiPiano</a>
+        by
+        <a href="https://twitter.com/b_viguier">@b_viguier</a>
+        <br>
+        <a href="https://github.com/b-viguier/WebMidiDrums/tree/master#faq">FAQ</a>
+    </div>
+
+</div>
+</div>
+
+<script src="js/WebMidiDrum.js"></script>
+
+</body>
+</html>
