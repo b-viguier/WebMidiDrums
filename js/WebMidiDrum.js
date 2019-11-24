@@ -9,7 +9,8 @@ var app = new Vue({
         selectedMidiInputId: null,
         midiInput: null,
         selectedMidiOutputId: null,
-        midiOutput: null
+        midiOutput: null,
+        hiHatClosed: true
     },
     created: function () {
 
@@ -49,23 +50,19 @@ var app = new Vue({
             if(this.midiInput && this.midiOutput) {
                 this.midiInput.removeListener();
                 this.midiInput.addListener('midimessage', 'all', (event) => {
-                    console.log(event.data);
-                    if(event.data[0] == 153 && event.data[1] == 46) {
+
+                    if(this.hiHatClosed && event.data[0] == 153 && event.data[1] == 46) {
                         event.data[1] = 44;
                     }
 
                     var message = [];
-
                     event.data.slice(1).forEach(function(item){
-
                         var parsed = Math.floor(item); // mandatory because of "null"
-
                         if (parsed >= 0 && parsed <= 255) {
                             message.push(parsed);
                         } else {
                             throw new RangeError("WTF??");
                         }
-
                     });
                     this.midiOutput.send(event.data[0], message);
                 });
