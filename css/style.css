@@ -1,0 +1,21 @@
+
+.error {
+    background: #e28e94;
+}
+
+.settings {
+    background:linear-gradient(60deg, #b2c7db, #717dca);
+}
+
+.credits {
+    margin-top: 50px;
+    color: cornsilk;
+}
+
+.credits a {
+    color: cornsilk;
+}
+
+body {
+    background:#666;
+}

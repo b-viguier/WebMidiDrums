@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>WebMidi Drums</title>
 
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="js/webmidi.min.js"></script>
     <script src="js/vue.js"></script>
 </head>
@@ -12,21 +13,24 @@
 
     <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
     <div v-else-if="midiInput == null">Looking for MIDI devices…</div>
-    <div v-if="midiInput != null" class="settings">
-        <label for="midi-input">Midi Input:</label>
-        <select id="midi-input" v-model="selectedMidiInputId">
-            <option v-for="input in WebMidi.inputs" :value="input.id" :key="input.id">{{ input.name }}</option>
-        </select>
-    </div>
-    <div v-if="midiOutput != null" class="settings">
-        <label for="midi-output">Midi Output:</label>
-        <select id="midi-output" v-model="selectedMidiOutputId">
-            <option v-for="output in WebMidi.outputs" :value="output.id" :key="output.id">{{ output.name }}</option>
-        </select>
+    <div  class="settings">
+        <span v-if="midiInput != null">
+            <label for="midi-input">Midi Input:</label>
+            <select id="midi-input" v-model="selectedMidiInputId">
+                <option v-for="input in WebMidi.inputs" :value="input.id" :key="input.id">{{ input.name }}</option>
+            </select>
+        </span>
+        <span v-if="midiOutput != null">
+            <label for="midi-output">Midi Output:</label>
+            <select id="midi-output" v-model="selectedMidiOutputId">
+                <option v-for="output in WebMidi.outputs" :value="output.id" :key="output.id">{{ output.name }}</option>
+            </select>
+        </span>
+
     </div>
 
     <div class="credits">
-        <a href="https://github.com/b-viguier/WebMidiDrums">WebMidiPiano</a>
+        <a href="https://github.com/b-viguier/WebMidiDrums">WebMidiDrums</a>
         by
         <a href="https://twitter.com/b_viguier">@b_viguier</a>
         <br>
