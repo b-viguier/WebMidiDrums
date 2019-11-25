@@ -31,6 +31,20 @@
         <input type="checkbox" id="uniform" v-model.boolean="hiHatClosed">
     </div>
 
+    <svg width="600" height="480" xmlns="http://www.w3.org/2000/svg">
+
+        <circle id="redPad" cx="104" cy="250" r="100" stroke-width="4" stroke="red">
+            <animate ref="redPadAnim" attributeName="fill" begin="redPad.click" values="red;black" dur="0.3s"/>
+        </circle>
+        <circle id="bluePad" cx="308" cy="250" r="100" stroke-width="4" stroke="blue">
+            <animate ref="bluePadAnim" attributeName="fill" begin="bluePad.click" values="blue;black" dur="0.3s"/>
+        </circle>
+        <circle id="greenPad" cx="512" cy="250" r="100" stroke-width="4" stroke="green">
+            <animate ref="greenPadAnim" attributeName="fill" begin="greenPad.click" values="green;black" dur="0.3s"/>
+        </circle>
+
+    </svg>
+
     <div class="credits">
         <a href="https://github.com/b-viguier/WebMidiDrums">WebMidiDrums</a>
         by

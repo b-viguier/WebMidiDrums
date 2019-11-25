@@ -16,6 +16,10 @@
     color: cornsilk;
 }
 
+svg {
+    border: solid 2px white;
+}
+
 body {
     background:#666;
 }

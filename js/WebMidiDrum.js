@@ -50,21 +50,33 @@ var app = new Vue({
             if(this.midiInput && this.midiOutput) {
                 this.midiInput.removeListener();
                 this.midiInput.addListener('midimessage', 'all', (event) => {
-
-                    if(this.hiHatClosed && event.data[0] == 153 && event.data[1] == 46) {
-                        event.data[1] = 44;
+                    // Note On / Channel 10
+                    if(event.data[0] !== 153) {
+                        return;
                     }
 
-                    var message = [];
-                    event.data.slice(1).forEach(function(item){
-                        var parsed = Math.floor(item); // mandatory because of "null"
-                        if (parsed >= 0 && parsed <= 255) {
-                            message.push(parsed);
-                        } else {
-                            throw new RangeError("WTF??");
-                        }
-                    });
-                    this.midiOutput.send(event.data[0], message);
+                    switch(event.data[1]) {
+                        case 36:    // Bass Drum
+                            break;
+                        case 38:    // Snare
+                            this.$refs.redPadAnim.beginElement();
+                            break;
+                        case 46:    // HiHat
+                            if(this.hiHatClosed) {
+                                event.data[1] = 44;
+                            }
+                            break;
+                        case 48:    // Tom1
+                            this.$refs.bluePadAnim.beginElement();
+                            break;
+                        case 45:    // Tom2
+                            this.$refs.greenPadAnim.beginElement();
+                            break;
+                        case 49:    // Cymbal
+                            break;
+                    }
+
+                    this.midiOutput.send(event.data[0], Array.from(event.data.slice(1)));
                 });
             }
         }
